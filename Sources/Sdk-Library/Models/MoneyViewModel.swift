@@ -17,15 +17,18 @@ public struct MoneyViewModel: Codable, JSONEncodable, Hashable {
     public var amount: Double?
     /** Валюта. */
     public var currency: String?
+    public var currencyInfo: CurrencyInfoModel?
 
-    public init(amount: Double? = nil, currency: String? = nil) {
+    public init(amount: Double? = nil, currency: String? = nil, currencyInfo: CurrencyInfoModel? = nil) {
         self.amount = amount
         self.currency = currency
+        self.currencyInfo = currencyInfo
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case amount
         case currency
+        case currencyInfo
     }
 
     // Encodable protocol methods
@@ -34,6 +37,7 @@ public struct MoneyViewModel: Codable, JSONEncodable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(amount, forKey: .amount)
         try container.encodeIfPresent(currency, forKey: .currency)
+        try container.encodeIfPresent(currencyInfo, forKey: .currencyInfo)
     }
 }
 
