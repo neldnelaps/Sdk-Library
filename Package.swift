@@ -21,7 +21,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "Sdk-Library",
-            dependencies: []),
+            dependencies: ["AnyCodable"]),
         .testTarget(
             name: "Sdk-LibraryTests",
             dependencies: ["Sdk-Library"]),
