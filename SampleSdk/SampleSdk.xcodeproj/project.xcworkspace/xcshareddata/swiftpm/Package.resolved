@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "anycodable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Flight-School/AnyCodable",
+      "state" : {
+        "branch" : "master",
+        "revision" : "f9fda69a7b704d46fb5123005f2f7e43dbb8a0fa"
+      }
+    },
+    {
+      "identity" : "sdk-library",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/neldnelaps/Sdk-Library.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "76a1ecf72363978dd1f230397a0c810186aaf093"
+      }
+    }
+  ],
+  "version" : 2
+}
