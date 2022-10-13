@@ -10,27 +10,6 @@ import Foundation
 import AnyCodable
 #endif
 
-<<<<<<< Updated upstream
-/** Модель с информацией о валюте. */
-public struct CurrencyInfoModel: Codable, JSONEncodable, Hashable {
-
-    /** Идентификатор валюты. */
-    public var id: Int?
-    /** Название. */
-    public var name: String?
-    /** Внешний идентификатор. */
-    public var externalId: String?
-    /** Описание. */
-    public var description: String?
-    /** Является ли валюта архивной. */
-    public var isDeleted: Bool?
-    public var nameCases: NameCaseModel?
-
-    public init(id: Int? = nil, name: String? = nil, externalId: String? = nil, description: String? = nil, isDeleted: Bool? = nil, nameCases: NameCaseModel? = nil) {
-        self.id = id
-        self.name = name
-        self.externalId = externalId
-=======
 /** Модель подробной информации о валюте. */
 public struct CurrencyInfoModel: Codable, JSONEncodable, Hashable {
 
@@ -59,7 +38,6 @@ public struct CurrencyInfoModel: Codable, JSONEncodable, Hashable {
         self.uid = uid
         self.externalId = externalId
         self.imageId = imageId
->>>>>>> Stashed changes
         self.description = description
         self.isDeleted = isDeleted
         self.nameCases = nameCases
@@ -68,14 +46,10 @@ public struct CurrencyInfoModel: Codable, JSONEncodable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case id
         case name
-<<<<<<< Updated upstream
-        case externalId
-=======
         case code
         case uid
         case externalId
         case imageId
->>>>>>> Stashed changes
         case description
         case isDeleted
         case nameCases
@@ -87,14 +61,10 @@ public struct CurrencyInfoModel: Codable, JSONEncodable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(name, forKey: .name)
-<<<<<<< Updated upstream
-        try container.encodeIfPresent(externalId, forKey: .externalId)
-=======
         try container.encodeIfPresent(code, forKey: .code)
         try container.encodeIfPresent(uid, forKey: .uid)
         try container.encodeIfPresent(externalId, forKey: .externalId)
         try container.encodeIfPresent(imageId, forKey: .imageId)
->>>>>>> Stashed changes
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(isDeleted, forKey: .isDeleted)
         try container.encodeIfPresent(nameCases, forKey: .nameCases)
