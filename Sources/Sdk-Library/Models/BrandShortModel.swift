@@ -13,32 +13,57 @@ import AnyCodable
 /** Модель представления для бренда. */
 public struct BrandShortModel: Codable, JSONEncodable, Hashable {
 
+    /** Внешний идентификатор бренда. */
+    public var uid: UUID?
+    /** Название бренда. */
+    public var name: String?
+    /** Описание. */
+    public var description: String?
+    /** Адрес сайта бренда. */
+    public var url: String?
+    /** Изображения бренда. */
+    public var images: [ImageViewModel]?
     /** Идентификатор. */
     public var id: UUID?
-    /** Имя бренда. */
-    public var name: String?
-    /** Изображения. */
-    public var images: [ImageViewModel]?
+    /** Код. */
+    public var code: String?
+    /** Идентификатор. */
+    public var mainId: Int?
 
-    public init(id: UUID? = nil, name: String? = nil, images: [ImageViewModel]? = nil) {
-        self.id = id
+    public init(uid: UUID? = nil, name: String? = nil, description: String? = nil, url: String? = nil, images: [ImageViewModel]? = nil, id: UUID? = nil, code: String? = nil, mainId: Int? = nil) {
+        self.uid = uid
         self.name = name
+        self.description = description
+        self.url = url
         self.images = images
+        self.id = id
+        self.code = code
+        self.mainId = mainId
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case id
+        case uid
         case name
+        case description
+        case url
         case images
+        case id
+        case code
+        case mainId
     }
 
     // Encodable protocol methods
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(uid, forKey: .uid)
         try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(url, forKey: .url)
         try container.encodeIfPresent(images, forKey: .images)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(code, forKey: .code)
+        try container.encodeIfPresent(mainId, forKey: .mainId)
     }
 }
 

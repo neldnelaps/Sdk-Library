@@ -10,6 +10,7 @@ import Foundation
 import AnyCodable
 #endif
 
+<<<<<<< Updated upstream
 /** Модель с информацией о валюте. */
 public struct CurrencyInfoModel: Codable, JSONEncodable, Hashable {
 
@@ -29,6 +30,36 @@ public struct CurrencyInfoModel: Codable, JSONEncodable, Hashable {
         self.id = id
         self.name = name
         self.externalId = externalId
+=======
+/** Модель подробной информации о валюте. */
+public struct CurrencyInfoModel: Codable, JSONEncodable, Hashable {
+
+    /** Внутренний идентификатор валюты. */
+    public var id: Int?
+    /** Название валюты. */
+    public var name: String?
+    /** Код валюты. */
+    public var code: String?
+    /** Внешний идентификатор валюты. */
+    public var uid: String?
+    /** Параметр не используется, необходимо оставлять значение по умолчанию. */
+    public var externalId: String?
+    /** Внутренний идентификатор изображения валюты. */
+    public var imageId: UUID?
+    /** Описание валюты. */
+    public var description: String?
+    /** Признак состояния валюты (true — архивная, false — неархивная). */
+    public var isDeleted: Bool?
+    public var nameCases: NameCaseModel?
+
+    public init(id: Int? = nil, name: String? = nil, code: String? = nil, uid: String? = nil, externalId: String? = nil, imageId: UUID? = nil, description: String? = nil, isDeleted: Bool? = nil, nameCases: NameCaseModel? = nil) {
+        self.id = id
+        self.name = name
+        self.code = code
+        self.uid = uid
+        self.externalId = externalId
+        self.imageId = imageId
+>>>>>>> Stashed changes
         self.description = description
         self.isDeleted = isDeleted
         self.nameCases = nameCases
@@ -37,7 +68,14 @@ public struct CurrencyInfoModel: Codable, JSONEncodable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case id
         case name
+<<<<<<< Updated upstream
         case externalId
+=======
+        case code
+        case uid
+        case externalId
+        case imageId
+>>>>>>> Stashed changes
         case description
         case isDeleted
         case nameCases
@@ -49,7 +87,14 @@ public struct CurrencyInfoModel: Codable, JSONEncodable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(id, forKey: .id)
         try container.encodeIfPresent(name, forKey: .name)
+<<<<<<< Updated upstream
         try container.encodeIfPresent(externalId, forKey: .externalId)
+=======
+        try container.encodeIfPresent(code, forKey: .code)
+        try container.encodeIfPresent(uid, forKey: .uid)
+        try container.encodeIfPresent(externalId, forKey: .externalId)
+        try container.encodeIfPresent(imageId, forKey: .imageId)
+>>>>>>> Stashed changes
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(isDeleted, forKey: .isDeleted)
         try container.encodeIfPresent(nameCases, forKey: .nameCases)

@@ -16,7 +16,7 @@ public struct UserViewModel: Codable, JSONEncodable, Hashable {
     /** Идентификатор пользователя. */
     public var id: Int?
     /** Уникальный идентификатор пользователя. */
-    public var personUid: String?
+    public var personUid: UUID?
     /** Имя. */
     public var firstName: String?
     /** Фамилия. */
@@ -24,7 +24,7 @@ public struct UserViewModel: Codable, JSONEncodable, Hashable {
     /** Отчество. */
     public var patronymicName: String?
 
-    public init(id: Int? = nil, personUid: String? = nil, firstName: String? = nil, lastName: String? = nil, patronymicName: String? = nil) {
+    public init(id: Int? = nil, personUid: UUID? = nil, firstName: String? = nil, lastName: String? = nil, patronymicName: String? = nil) {
         self.id = id
         self.personUid = personUid
         self.firstName = firstName

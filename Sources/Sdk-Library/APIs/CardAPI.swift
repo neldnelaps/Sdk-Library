@@ -13,9 +13,427 @@ import AnyCodable
 open class CardAPI {
 
     /**
-     Получение карты по идентификатору.
+     Отменяет начатое объединение карт.
      
-     - parameter cardId: (path) Идентификатор карты. 
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardAttachCardCancel(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardAttachCardCancelWithRequestBuilder().execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Отменяет начатое объединение карт.
+     - POST /v1.2/Cards/Attach/Cancel
+     - returns: RequestBuilder<ResultModel> 
+     */
+    open class func cardAttachCardCancelWithRequestBuilder() -> RequestBuilder<ResultModel> {
+        let localVariablePath = "/v1.2/Cards/Attach/Cancel"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Завершает начатое объединение карт.
+     
+     - parameter confirmCode: (query) Код подтверждения. 
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardAttachCardConfirm(confirmCode: String, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardAttachCardConfirmWithRequestBuilder(confirmCode: confirmCode).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Завершает начатое объединение карт.
+     - POST /v1.2/Cards/Attach/Confirm
+     - parameter confirmCode: (query) Код подтверждения. 
+     - returns: RequestBuilder<ResultModel> 
+     */
+    open class func cardAttachCardConfirmWithRequestBuilder(confirmCode: String) -> RequestBuilder<ResultModel> {
+        let localVariablePath = "/v1.2/Cards/Attach/Confirm"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "confirmCode": confirmCode.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Отправляет повторно код подтверждения в процессе объединения карт.
+     
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardAttachCardSendConfirmCode(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardAttachCardSendConfirmCodeWithRequestBuilder().execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Отправляет повторно код подтверждения в процессе объединения карт.
+     - POST /v1.2/Cards/Attach/SendConfirmCode
+     - returns: RequestBuilder<ResultModel> 
+     */
+    open class func cardAttachCardSendConfirmCodeWithRequestBuilder() -> RequestBuilder<ResultModel> {
+        let localVariablePath = "/v1.2/Cards/Attach/SendConfirmCode"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Возвращает текущее состояние процесса прикрепления карты.
+     
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardAttachCardState(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfAttachCardState?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardAttachCardStateWithRequestBuilder().execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Возвращает текущее состояние процесса прикрепления карты.
+     - GET /v1.2/Cards/Attach
+     - returns: RequestBuilder<ResultModelOfAttachCardState> 
+     */
+    open class func cardAttachCardStateWithRequestBuilder() -> RequestBuilder<ResultModelOfAttachCardState> {
+        let localVariablePath = "/v1.2/Cards/Attach"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfAttachCardState>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Блокирует/разблокирует карту.
+     
+     - parameter cardId: (path) Внутренний идентификатор карты. 
+     - parameter password: (query) Пароль. 
+     - parameter reason: (query) Причины блокировки. (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardChangeBlockState(cardId: Int, password: String, reason: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardChangeBlockStateWithRequestBuilder(cardId: cardId, password: password, reason: reason).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Блокирует/разблокирует карту.
+     - POST /v1.2/Cards/{cardId}/ChangeBlockState
+     - В случае успешного завершения вызова, карта меняет значение флага \"Заблокирована для оплаты\" с текущего на противоположное.
+     - parameter cardId: (path) Внутренний идентификатор карты. 
+     - parameter password: (query) Пароль. 
+     - parameter reason: (query) Причины блокировки. (optional)
+     - returns: RequestBuilder<ResultModel> 
+     */
+    open class func cardChangeBlockStateWithRequestBuilder(cardId: Int, password: String, reason: String? = nil) -> RequestBuilder<ResultModel> {
+        var localVariablePath = "/v1.2/Cards/{cardId}/ChangeBlockState"
+        let cardIdPreEscape = "\(APIHelper.mapValueToPathItem(cardId))"
+        let cardIdPostEscape = cardIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{cardId}", with: cardIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "password": password.encodeToJSON(),
+            "reason": reason?.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Обновляет срок действия карты.
+     
+     - parameter cardId: (path) Внутренний идентификатор карты. 
+     - parameter changeExpiryDate: (query) Данные для изменения срока действия карты. 
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardChangeExpiryDate(cardId: Int, changeExpiryDate: ChangeExpiryDateModel, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardChangeExpiryDateWithRequestBuilder(cardId: cardId, changeExpiryDate: changeExpiryDate).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Обновляет срок действия карты.
+     - POST /v1.2/Cards/{cardId}/ExpiryDate
+     - parameter cardId: (path) Внутренний идентификатор карты. 
+     - parameter changeExpiryDate: (query) Данные для изменения срока действия карты. 
+     - returns: RequestBuilder<ResultModel> 
+     */
+    open class func cardChangeExpiryDateWithRequestBuilder(cardId: Int, changeExpiryDate: ChangeExpiryDateModel) -> RequestBuilder<ResultModel> {
+        var localVariablePath = "/v1.2/Cards/{cardId}/ExpiryDate"
+        let cardIdPreEscape = "\(APIHelper.mapValueToPathItem(cardId))"
+        let cardIdPostEscape = cardIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{cardId}", with: cardIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "changeExpiryDate": changeExpiryDate.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Проверяет пароль карты.
+     
+     - parameter cardId: (path) Внутренний идентификатор карты. 
+     - parameter cardPassword: (query) Пароль. 
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardCheckCardPassword(cardId: Int, cardPassword: String, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfBoolean?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardCheckCardPasswordWithRequestBuilder(cardId: cardId, cardPassword: cardPassword).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Проверяет пароль карты.
+     - GET /v1.2/Cards/{cardId}/checkPassword
+     - parameter cardId: (path) Внутренний идентификатор карты. 
+     - parameter cardPassword: (query) Пароль. 
+     - returns: RequestBuilder<ResultModelOfBoolean> 
+     */
+    open class func cardCheckCardPasswordWithRequestBuilder(cardId: Int, cardPassword: String) -> RequestBuilder<ResultModelOfBoolean> {
+        var localVariablePath = "/v1.2/Cards/{cardId}/checkPassword"
+        let cardIdPreEscape = "\(APIHelper.mapValueToPathItem(cardId))"
+        let cardIdPostEscape = cardIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{cardId}", with: cardIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "cardPassword": cardPassword.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfBoolean>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Проверяет CVC-код карты.
+     
+     - parameter cardId: (path) Внутренний идентификатор карты. 
+     - parameter cvc: (query) CVC-код. 
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardCheckCvc(cardId: Int, cvc: String, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfBoolean?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardCheckCvcWithRequestBuilder(cardId: cardId, cvc: cvc).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Проверяет CVC-код карты.
+     - GET /v1.2/Cards/{cardId}/checkCvc
+     - parameter cardId: (path) Внутренний идентификатор карты. 
+     - parameter cvc: (query) CVC-код. 
+     - returns: RequestBuilder<ResultModelOfBoolean> 
+     */
+    open class func cardCheckCvcWithRequestBuilder(cardId: Int, cvc: String) -> RequestBuilder<ResultModelOfBoolean> {
+        var localVariablePath = "/v1.2/Cards/{cardId}/checkCvc"
+        let cardIdPreEscape = "\(APIHelper.mapValueToPathItem(cardId))"
+        let cardIdPostEscape = cardIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{cardId}", with: cardIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "cvc": cvc.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfBoolean>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Возвращает информацию о возможности выпуска виртуальной карты.
+     
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardEmitVirtualCardInfo(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfEmitVirtualCardInfoModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardEmitVirtualCardInfoWithRequestBuilder().execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Возвращает информацию о возможности выпуска виртуальной карты.
+     - GET /v1.2/Cards/EmitVirtual
+     - returns: RequestBuilder<ResultModelOfEmitVirtualCardInfoModel> 
+     */
+    open class func cardEmitVirtualCardInfoWithRequestBuilder() -> RequestBuilder<ResultModelOfEmitVirtualCardInfoModel> {
+        let localVariablePath = "/v1.2/Cards/EmitVirtual"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfEmitVirtualCardInfoModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Возвращает информацию о карте по внутреннему идентификатору карты.
+     
+     - parameter cardId: (path) Внутренний идентификатор карты. 
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -32,9 +450,9 @@ open class CardAPI {
     }
 
     /**
-     Получение карты по идентификатору.
+     Возвращает информацию о карте по внутреннему идентификатору карты.
      - GET /v1.2/Cards/{cardId}
-     - parameter cardId: (path) Идентификатор карты. 
+     - parameter cardId: (path) Внутренний идентификатор карты. 
      - returns: RequestBuilder<ResultModelOfCardInfo> 
      */
     open class func cardGetCardWithRequestBuilder(cardId: Int) -> RequestBuilder<ResultModelOfCardInfo> {
@@ -59,7 +477,171 @@ open class CardAPI {
     }
 
     /**
-     Получение карт текущего пользователя.
+     Возвращает информацию о карте по ее внутреннему идентификатору.
+     
+     - parameter cardId: (path) Внутренний идентификатор карты. 
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardGetCardInfo(cardId: Int, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfSystemApiCardInfoModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardGetCardInfoWithRequestBuilder(cardId: cardId).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Возвращает информацию о карте по ее внутреннему идентификатору.
+     - GET /v1.2/Cards/{cardId}/CardInfo
+     - parameter cardId: (path) Внутренний идентификатор карты. 
+     - returns: RequestBuilder<ResultModelOfSystemApiCardInfoModel> 
+     */
+    open class func cardGetCardInfoWithRequestBuilder(cardId: Int) -> RequestBuilder<ResultModelOfSystemApiCardInfoModel> {
+        var localVariablePath = "/v1.2/Cards/{cardId}/CardInfo"
+        let cardIdPreEscape = "\(APIHelper.mapValueToPathItem(cardId))"
+        let cardIdPostEscape = cardIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{cardId}", with: cardIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfSystemApiCardInfoModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Возвращает список карт по параметрам.
+     
+     - parameter from: (query) Порядковый номер начального элемента выборки. 
+     - parameter count: (query) Количество возвращаемых элементов выборки. 
+     - parameter state: (query) Состояние карты (сгенерирована, расфасована, активирована, заменена, создается, создана, готова к выдаче, выдана клиенту, срок действия истек). 
+     - parameter hasPerson: (query) Привязана ли карта к пользователю (true-привязана, false-не привязана). (optional)
+     - parameter isBlocked: (query) Является ли карта заблокированной (true-заблокирована, false-не заблокирована). (optional)
+     - parameter isGift: (query) Является ли карта подарочной (true-подарочная, false-не подарочная). (optional)
+     - parameter isDeleted: (query) Является ли карта удаленной (true-удалена, false-не удалена). (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardGetCardInfosByFilter(from: Int, count: Int, state: CardState, hasPerson: Bool? = nil, isBlocked: Bool? = nil, isGift: Bool? = nil, isDeleted: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfPagedViewModelOfSystemApiCardInfoModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardGetCardInfosByFilterWithRequestBuilder(from: from, count: count, state: state, hasPerson: hasPerson, isBlocked: isBlocked, isGift: isGift, isDeleted: isDeleted).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Возвращает список карт по параметрам.
+     - GET /v1.2/Cards/byParams
+     - parameter from: (query) Порядковый номер начального элемента выборки. 
+     - parameter count: (query) Количество возвращаемых элементов выборки. 
+     - parameter state: (query) Состояние карты (сгенерирована, расфасована, активирована, заменена, создается, создана, готова к выдаче, выдана клиенту, срок действия истек). 
+     - parameter hasPerson: (query) Привязана ли карта к пользователю (true-привязана, false-не привязана). (optional)
+     - parameter isBlocked: (query) Является ли карта заблокированной (true-заблокирована, false-не заблокирована). (optional)
+     - parameter isGift: (query) Является ли карта подарочной (true-подарочная, false-не подарочная). (optional)
+     - parameter isDeleted: (query) Является ли карта удаленной (true-удалена, false-не удалена). (optional)
+     - returns: RequestBuilder<ResultModelOfPagedViewModelOfSystemApiCardInfoModel> 
+     */
+    open class func cardGetCardInfosByFilterWithRequestBuilder(from: Int, count: Int, state: CardState, hasPerson: Bool? = nil, isBlocked: Bool? = nil, isGift: Bool? = nil, isDeleted: Bool? = nil) -> RequestBuilder<ResultModelOfPagedViewModelOfSystemApiCardInfoModel> {
+        let localVariablePath = "/v1.2/Cards/byParams"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "from": from.encodeToJSON(),
+            "count": count.encodeToJSON(),
+            "state": state.encodeToJSON(),
+            "hasPerson": hasPerson?.encodeToJSON(),
+            "isBlocked": isBlocked?.encodeToJSON(),
+            "isGift": isGift?.encodeToJSON(),
+            "isDeleted": isDeleted?.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfPagedViewModelOfSystemApiCardInfoModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Возвращает цепочку замен карт по внутреннему идентификатору карты.
+     
+     - parameter cardId: (path) Внутренний идентификатор карты. 
+     - parameter from: (query) Порядковый номер начального элемента выборки. (optional)
+     - parameter count: (query) Количество возвращаемых элементов выборки. (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardGetCardReplacementsByCardId(cardId: Int, from: Int? = nil, count: Int? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfPagedViewModelOfSystemApiCardInfoModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardGetCardReplacementsByCardIdWithRequestBuilder(cardId: cardId, from: from, count: count).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Возвращает цепочку замен карт по внутреннему идентификатору карты.
+     - GET /v1.2/Cards/{cardId}/ReplacementChain
+     - parameter cardId: (path) Внутренний идентификатор карты. 
+     - parameter from: (query) Порядковый номер начального элемента выборки. (optional)
+     - parameter count: (query) Количество возвращаемых элементов выборки. (optional)
+     - returns: RequestBuilder<ResultModelOfPagedViewModelOfSystemApiCardInfoModel> 
+     */
+    open class func cardGetCardReplacementsByCardIdWithRequestBuilder(cardId: Int, from: Int? = nil, count: Int? = nil) -> RequestBuilder<ResultModelOfPagedViewModelOfSystemApiCardInfoModel> {
+        var localVariablePath = "/v1.2/Cards/{cardId}/ReplacementChain"
+        let cardIdPreEscape = "\(APIHelper.mapValueToPathItem(cardId))"
+        let cardIdPostEscape = cardIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{cardId}", with: cardIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "from": from?.encodeToJSON(),
+            "count": count?.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfPagedViewModelOfSystemApiCardInfoModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Возвращает список карт текущего клиента и все операции по ним (OAuth).
      
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
@@ -77,7 +659,7 @@ open class CardAPI {
     }
 
     /**
-     Получение карт текущего пользователя.
+     Возвращает список карт текущего клиента и все операции по ним (OAuth).
      - GET /v1.2/Cards
      - returns: RequestBuilder<ResultModelOfListOfCardInfo> 
      */
@@ -89,57 +671,342 @@ open class CardAPI {
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: Any?] = [
-            "X-PlatformType": "Ios",
-            "Accept": "application/json",
-            "X-SdkVersion":"2021.1.2012.119",
-            "X-DeviceId":"9a9fb4c4-5ae4-45bb-96a4-5188e38a3d64",
-            "X-PlatformVersion":"15.5",
-            "User-Agent":["Loymax-Mobile-dev.loymax.playground/1.0","(Ios/15.5; Simulator)","9a9fb4c4-5ae4-45bb-96a4-5188e38a3d64","build/1.0"],
-            "Accept-Language":"ru",
-            "Authorization": "Bearer r7LhY_I2CrUoMTXznLM7lXH9SvSFE2UlFw7ha0ZMrXxlLwhZYVpn_dCu9pSfaI6xwnko0HoO7HoMm7j17IhWLPF7Kf6N3jm-O-wv3rriPB-0psWbBAdzC7rGTRmpEEuLBdCYeXK5irlTf0oo1gUtvf4Klluz-F3wcvcRw9rkNo5vtzvcqvLe7D7AUfH1cIA6b2gFrHz-cPrFb1l8Nr9r10qBWir5PB6L9sEqLdo9ZLXhxgGrgFQjFJHM9nRffSwHZLgD11eOI1i2qJG0vYMBqsR_Tg_pfZk6JHcDMCJOLe-C5psgC72sd5DG73T7EQ1DZZE8GoRJCFmiFGdnRW6by4N8nDbIP_HEZ_WdGCGjuKR7SVJi6SrRz0SRPLyZs1ec4QlY1Ke35hTpPwb8k9rVM4WWJyGwzwr5fX8Ut_x1Ax3p5FzpAO-pwEJTiesCxo1_",
+            :
         ]
-        /**5452-23: 1d9152e5d6764126a2b132b6909e2ffc: 2022-06-22T03:29:59.7929190Z: GET: https://demo.loymax.tech/publicapi/v1.2/Cards, remoteIp=192.168.100.22, clientIp=192.168.100.22
-         Connection: close
-         Accept: application/json
-         Accept-Encoding: gzip, deflate, br
-         Accept-Language: ru
-         Host: demo.loymax.tech
-         User-Agent: Loymax-Mobile-dev.loymax.playground/1.0 (Ios/15.5; Simulator) 9a9fb4c4-5ae4-45bb-96a4-5188e38a3d64 build/1.0
-         X-Real-IP: 176.65.38.112
-         X-Forwarded-For: 176.65.38.112
-         X-PlatformVersion: 15.5
-         X-SdkVersion: 2021.1.2012.119
-         X-DeviceId: 9a9fb4c4-5ae4-45bb-96a4-5188e38a3d64
-         X-PlatformType: Ios*/
-
-        /**5452-19: ab800be899a34112b977108297e53b44: 2022-06-22T06:07:18.0263602Z: GET: https://demo.loymax.tech/publicapi/v1.2/Cards, remoteIp=192.168.100.22, clientIp=192.168.100.22
-         Connection: close
-         Accept: application/json
-         Accept-Encoding: gzip, deflate, br
-         Accept-Language: ru
-         Host: demo.loymax.tech
-         User-Agent: Loymax-Mobile-dev.loymax.playground/1.0,(Ios/15.5; Simulator),9a9fb4c4-5ae4-45bb-96a4-5188e38a3d64,build/1.0
-         X-Real-IP: 176.65.38.112
-         X-Forwarded-For: 176.65.38.112
-         X-PlatformVersion: 15.5Test
-         X-SdkVersion: 2021.1.2012.119
-         X-DeviceId: 9a9fb4c4-5ae4-45bb-96a4-5188e38a3d64*/
-        
-        
-        
-        //[
-        //{"Key":"Accept", "Value":["application/json"]},
-        //{"Key":"X-SdkVersion", "Value":["2021.1.2012.119"]},
-        //{"Key":"X-DeviceId","Value":["9a9fb4c4-5ae4-45bb-96a4-5188e38a3d64"]},
-        //{"Key":"X-PlatformType","Value":["Ios"]},
-        //{"Key":"X-PlatformVersion","Value":["15.5"]},
-        //{"Key":"User-Agent","Value":["Loymax-Mobile-dev.loymax.playground/1.0","(Ios/15.5; Simulator)","9a9fb4c4-5ae4-45bb-96a4-5188e38a3d64","build/1.0"]},
-        //{"Key":"Accept-Language","Value":["ru"]},
-        //{"Key":"Authorization","Value":["Bearer r7LhY_I2CrUoMTXznLM7lXH9SvSFE2UlFw7ha0ZMrXxlLwhZYVpn_dCu9pSfaI6xwnko0HoO7HoMm7j17IhWLPF7Kf6N3jm-O-wv3rriPB-0psWbBAdzC7rGTRmpEEuLBdCYeXK5irlTf0oo1gUtvf4Klluz-F3wcvcRw9rkNo5vtzvcqvLe7D7AUfH1cIA6b2gFrHz-cPrFb1l8Nr9r10qBWir5PB6L9sEqLdo9ZLXhxgGrgFQjFJHM9nRffSwHZLgD11eOI1i2qJG0vYMBqsR_Tg_pfZk6JHcDMCJOLe-C5psgC72sd5DG73T7EQ1DZZE8GoRJCFmiFGdnRW6by4N8nDbIP_HEZ_WdGCGjuKR7SVJi6SrRz0SRPLyZs1ec4QlY1Ke35hTpPwb8k9rVM4WWJyGwzwr5fX8Ut_x1Ax3p5FzpAO-pwEJTiesCxo1_"]}]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
         let localVariableRequestBuilder: RequestBuilder<ResultModelOfListOfCardInfo>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Возвращает информацию о карте по ее номеру и внутреннему идентификатору ПЛ.
+     
+     - parameter cardNumber: (query) Номер карты. 
+     - parameter loyaltyProgramId: (query) Внутренний идентификатор Программы лояльности. (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardGetCardsByCardNumber(cardNumber: String, loyaltyProgramId: Int? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfSystemApiCardInfoModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardGetCardsByCardNumberWithRequestBuilder(cardNumber: cardNumber, loyaltyProgramId: loyaltyProgramId).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Возвращает информацию о карте по ее номеру и внутреннему идентификатору ПЛ.
+     - GET /v1.2/Cards/ByCardNumber
+     - parameter cardNumber: (query) Номер карты. 
+     - parameter loyaltyProgramId: (query) Внутренний идентификатор Программы лояльности. (optional)
+     - returns: RequestBuilder<ResultModelOfSystemApiCardInfoModel> 
+     */
+    open class func cardGetCardsByCardNumberWithRequestBuilder(cardNumber: String, loyaltyProgramId: Int? = nil) -> RequestBuilder<ResultModelOfSystemApiCardInfoModel> {
+        let localVariablePath = "/v1.2/Cards/ByCardNumber"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "cardNumber": cardNumber.encodeToJSON(),
+            "loyaltyProgramId": loyaltyProgramId?.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfSystemApiCardInfoModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Генерирует QR-код для карты по внутреннему идентификатору карты.
+     
+     - parameter cardId: (path) Внутренний идентификатор карты. 
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardGetQrCode(cardId: Int, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfQrCodeModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardGetQrCodeWithRequestBuilder(cardId: cardId).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Генерирует QR-код для карты по внутреннему идентификатору карты.
+     - GET /v1.2/Cards/{cardId}/QrCode
+     - parameter cardId: (path) Внутренний идентификатор карты. 
+     - returns: RequestBuilder<ResultModelOfQrCodeModel> 
+     */
+    open class func cardGetQrCodeWithRequestBuilder(cardId: Int) -> RequestBuilder<ResultModelOfQrCodeModel> {
+        var localVariablePath = "/v1.2/Cards/{cardId}/QrCode"
+        let cardIdPreEscape = "\(APIHelper.mapValueToPathItem(cardId))"
+        let cardIdPostEscape = cardIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{cardId}", with: cardIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfQrCodeModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Возвращает информацию для диапазона карт из одного выпуска. Количество карт в диапазоне:не более 500.
+     
+     - parameter beginCardId: (path) Внутренний идентификатор карты начала диапазона. 
+     - parameter endCardId: (path) Внутренний идентификатор карты конца диапазона. 
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardGetRange(beginCardId: Int, endCardId: Int, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfListOfCardCompactInfoModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardGetRangeWithRequestBuilder(beginCardId: beginCardId, endCardId: endCardId).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Возвращает информацию для диапазона карт из одного выпуска. Количество карт в диапазоне:не более 500.
+     - GET /v1.2/Cards/Range/{beginCardId}/{endCardId}
+     - parameter beginCardId: (path) Внутренний идентификатор карты начала диапазона. 
+     - parameter endCardId: (path) Внутренний идентификатор карты конца диапазона. 
+     - returns: RequestBuilder<ResultModelOfListOfCardCompactInfoModel> 
+     */
+    open class func cardGetRangeWithRequestBuilder(beginCardId: Int, endCardId: Int) -> RequestBuilder<ResultModelOfListOfCardCompactInfoModel> {
+        var localVariablePath = "/v1.2/Cards/Range/{beginCardId}/{endCardId}"
+        let beginCardIdPreEscape = "\(APIHelper.mapValueToPathItem(beginCardId))"
+        let beginCardIdPostEscape = beginCardIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{beginCardId}", with: beginCardIdPostEscape, options: .literal, range: nil)
+        let endCardIdPreEscape = "\(APIHelper.mapValueToPathItem(endCardId))"
+        let endCardIdPostEscape = endCardIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{endCardId}", with: endCardIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfListOfCardCompactInfoModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Обновляет состояние карты на \"Выдана\".
+     
+     - parameter cardId: (path) Внутренний идентификатор неактивированной карты. 
+     - parameter partnerId: (query) Внутренний идентификатор Партнера, выдающего карту. 
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardIssueCard(cardId: Int, partnerId: Int, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardIssueCardWithRequestBuilder(cardId: cardId, partnerId: partnerId).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Обновляет состояние карты на \"Выдана\".
+     - POST /v1.2/Cards/{cardId}/Issue
+     - parameter cardId: (path) Внутренний идентификатор неактивированной карты. 
+     - parameter partnerId: (query) Внутренний идентификатор Партнера, выдающего карту. 
+     - returns: RequestBuilder<ResultModel> 
+     */
+    open class func cardIssueCardWithRequestBuilder(cardId: Int, partnerId: Int) -> RequestBuilder<ResultModel> {
+        var localVariablePath = "/v1.2/Cards/{cardId}/Issue"
+        let cardIdPreEscape = "\(APIHelper.mapValueToPathItem(cardId))"
+        let cardIdPostEscape = cardIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{cardId}", with: cardIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "partnerId": partnerId.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Оформляет замену карты.
+     
+     - parameter cardId: (path) Внутренний идентификатор заменяемой карты. 
+     - parameter replaceCardModel: (query) ViewModel входных параметров замены карты. 
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardReplaceCard(cardId: Int, replaceCardModel: ReplaceCardModel, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfReplaceCardResult?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardReplaceCardWithRequestBuilder(cardId: cardId, replaceCardModel: replaceCardModel).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Оформляет замену карты.
+     - POST /v1.2/Cards/{cardId}/Replace
+     - parameter cardId: (path) Внутренний идентификатор заменяемой карты. 
+     - parameter replaceCardModel: (query) ViewModel входных параметров замены карты. 
+     - returns: RequestBuilder<ResultModelOfReplaceCardResult> 
+     */
+    open class func cardReplaceCardWithRequestBuilder(cardId: Int, replaceCardModel: ReplaceCardModel) -> RequestBuilder<ResultModelOfReplaceCardResult> {
+        var localVariablePath = "/v1.2/Cards/{cardId}/Replace"
+        let cardIdPreEscape = "\(APIHelper.mapValueToPathItem(cardId))"
+        let cardIdPostEscape = cardIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{cardId}", with: cardIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "replaceCardModel": replaceCardModel.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfReplaceCardResult>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Возвращает информацию о настройках по прикреплению карт.
+     
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardSetCardConfigurationInfo(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfEmitCardInfoModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardSetCardConfigurationInfoWithRequestBuilder().execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Возвращает информацию о настройках по прикреплению карт.
+     - GET /v1.2/Cards/SetCardInfo
+     - returns: RequestBuilder<ResultModelOfEmitCardInfoModel> 
+     */
+    open class func cardSetCardConfigurationInfoWithRequestBuilder() -> RequestBuilder<ResultModelOfEmitCardInfoModel> {
+        let localVariablePath = "/v1.2/Cards/SetCardInfo"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfEmitCardInfoModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Возвращает информацию о возможности прикрепления физической карты.
+     
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func cardSetCardInfo(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfSetCardActionInfoModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return cardSetCardInfoWithRequestBuilder().execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Возвращает информацию о возможности прикрепления физической карты.
+     - GET /v1.2/Cards/Set
+     - returns: RequestBuilder<ResultModelOfSetCardActionInfoModel> 
+     */
+    open class func cardSetCardInfoWithRequestBuilder() -> RequestBuilder<ResultModelOfSetCardActionInfoModel> {
+        let localVariablePath = "/v1.2/Cards/Set"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfSetCardActionInfoModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }

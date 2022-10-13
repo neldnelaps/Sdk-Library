@@ -21,14 +21,17 @@ public struct CardCategoryInfo: Codable, JSONEncodable, Hashable {
     public var logicalName: String?
     /** Изображения. */
     public var images: [ImageViewModel]?
+    /** Пользовательское название. */
+    public var description: String?
     /** Количество карт в категории. */
     public var cardCount: Int?
 
-    public init(id: Int? = nil, title: String? = nil, logicalName: String? = nil, images: [ImageViewModel]? = nil, cardCount: Int? = nil) {
+    public init(id: Int? = nil, title: String? = nil, logicalName: String? = nil, images: [ImageViewModel]? = nil, description: String? = nil, cardCount: Int? = nil) {
         self.id = id
         self.title = title
         self.logicalName = logicalName
         self.images = images
+        self.description = description
         self.cardCount = cardCount
     }
 
@@ -37,6 +40,7 @@ public struct CardCategoryInfo: Codable, JSONEncodable, Hashable {
         case title
         case logicalName
         case images
+        case description
         case cardCount
     }
 
@@ -48,6 +52,7 @@ public struct CardCategoryInfo: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(logicalName, forKey: .logicalName)
         try container.encodeIfPresent(images, forKey: .images)
+        try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(cardCount, forKey: .cardCount)
     }
 }

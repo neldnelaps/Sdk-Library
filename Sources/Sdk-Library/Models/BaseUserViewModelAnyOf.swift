@@ -15,9 +15,9 @@ public struct BaseUserViewModelAnyOf: Codable, JSONEncodable, Hashable {
     /** Идентификатор пользователя. */
     public var id: Int?
     /** Уникальный идентификатор пользователя. */
-    public var personUid: String?
+    public var personUid: UUID?
 
-    public init(id: Int? = nil, personUid: String? = nil) {
+    public init(id: Int? = nil, personUid: UUID? = nil) {
         self.id = id
         self.personUid = personUid
     }

@@ -10,10 +10,10 @@ import Foundation
 import AnyCodable
 #endif
 
-/** Изображение. */
+/** Модель изображения бренда. */
 public struct ImageViewModel: Codable, JSONEncodable, Hashable {
 
-    /** Идентификатор файла в файловом хранилище. */
+    /** Внешний идентификатор файла в файловом хранилище. */
     public var fileId: UUID?
     /** Описание. */
     public var description: String?

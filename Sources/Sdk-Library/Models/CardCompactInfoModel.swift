@@ -24,14 +24,16 @@ public struct CardCompactInfoModel: Codable, JSONEncodable, Hashable {
     public var block: Bool?
     /** Дата истечения карты. */
     public var expiryDate: Date?
+    public var cardCategory: CardCategoryInfoBriefModel?
 
-    public init(id: Int? = nil, state: CardState? = nil, number: String? = nil, barCode: String? = nil, block: Bool? = nil, expiryDate: Date? = nil) {
+    public init(id: Int? = nil, state: CardState? = nil, number: String? = nil, barCode: String? = nil, block: Bool? = nil, expiryDate: Date? = nil, cardCategory: CardCategoryInfoBriefModel? = nil) {
         self.id = id
         self.state = state
         self.number = number
         self.barCode = barCode
         self.block = block
         self.expiryDate = expiryDate
+        self.cardCategory = cardCategory
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -41,6 +43,7 @@ public struct CardCompactInfoModel: Codable, JSONEncodable, Hashable {
         case barCode
         case block
         case expiryDate
+        case cardCategory
     }
 
     // Encodable protocol methods
@@ -53,6 +56,7 @@ public struct CardCompactInfoModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(barCode, forKey: .barCode)
         try container.encodeIfPresent(block, forKey: .block)
         try container.encodeIfPresent(expiryDate, forKey: .expiryDate)
+        try container.encodeIfPresent(cardCategory, forKey: .cardCategory)
     }
 }
 

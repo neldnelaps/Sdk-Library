@@ -10,45 +10,45 @@ import Foundation
 import AnyCodable
 #endif
 
-/** Информация о бренде. */
+/** Общая модель бренда. */
 public struct BrandModel: Codable, JSONEncodable, Hashable {
 
-    /** Идентификатор. */
-    public var id: UUID?
-    /** Имя бренда. */
+    /** Внешний идентификатор бренда. */
+    public var uid: UUID?
+    /** Название бренда. */
     public var name: String?
-    /** Изображения. */
-    public var images: [ImageViewModel]?
     /** Описание. */
     public var description: String?
-    /** Url. */
+    /** Адрес сайта бренда. */
     public var url: String?
+    /** Изображения бренда. */
+    public var images: [ImageViewModel]?
 
-    public init(id: UUID? = nil, name: String? = nil, images: [ImageViewModel]? = nil, description: String? = nil, url: String? = nil) {
-        self.id = id
+    public init(uid: UUID? = nil, name: String? = nil, description: String? = nil, url: String? = nil, images: [ImageViewModel]? = nil) {
+        self.uid = uid
         self.name = name
-        self.images = images
         self.description = description
         self.url = url
+        self.images = images
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case id
+        case uid
         case name
-        case images
         case description
         case url
+        case images
     }
 
     // Encodable protocol methods
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(uid, forKey: .uid)
         try container.encodeIfPresent(name, forKey: .name)
-        try container.encodeIfPresent(images, forKey: .images)
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(url, forKey: .url)
+        try container.encodeIfPresent(images, forKey: .images)
     }
 }
 

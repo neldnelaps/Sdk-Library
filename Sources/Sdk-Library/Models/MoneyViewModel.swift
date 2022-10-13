@@ -10,7 +10,7 @@ import Foundation
 import AnyCodable
 #endif
 
-/** ViewModel представления денег. */
+/** Модель денежных средств. */
 public struct MoneyViewModel: Codable, JSONEncodable, Hashable {
 
     /** Сумма. */

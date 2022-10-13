@@ -24,10 +24,10 @@ public struct AbstractCardInfoModel: Codable, JSONEncodable, Hashable {
     public var block: Bool?
     /** Дата истечения карты. */
     public var expiryDate: Date?
-    public var cardCategory: CardCategoryInfo?
+    public var cardCategory: CardCategoryInfoBriefModel?
     public var cardOwnerInfo: UserInfoBase?
 
-    public init(id: Int? = nil, state: CardState? = nil, number: String? = nil, barCode: String? = nil, block: Bool? = nil, expiryDate: Date? = nil, cardCategory: CardCategoryInfo? = nil, cardOwnerInfo: UserInfoBase? = nil) {
+    public init(id: Int? = nil, state: CardState? = nil, number: String? = nil, barCode: String? = nil, block: Bool? = nil, expiryDate: Date? = nil, cardCategory: CardCategoryInfoBriefModel? = nil, cardOwnerInfo: UserInfoBase? = nil) {
         self.id = id
         self.state = state
         self.number = number

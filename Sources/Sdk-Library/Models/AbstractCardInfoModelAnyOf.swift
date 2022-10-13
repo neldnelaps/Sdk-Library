@@ -12,16 +12,13 @@ import AnyCodable
 
 public struct AbstractCardInfoModelAnyOf: Codable, JSONEncodable, Hashable {
 
-    public var cardCategory: CardCategoryInfo?
     public var cardOwnerInfo: UserInfoBase?
 
-    public init(cardCategory: CardCategoryInfo? = nil, cardOwnerInfo: UserInfoBase? = nil) {
-        self.cardCategory = cardCategory
+    public init(cardOwnerInfo: UserInfoBase? = nil) {
         self.cardOwnerInfo = cardOwnerInfo
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case cardCategory
         case cardOwnerInfo
     }
 
@@ -29,7 +26,6 @@ public struct AbstractCardInfoModelAnyOf: Codable, JSONEncodable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(cardCategory, forKey: .cardCategory)
         try container.encodeIfPresent(cardOwnerInfo, forKey: .cardOwnerInfo)
     }
 }

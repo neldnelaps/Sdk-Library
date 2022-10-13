@@ -10,7 +10,6 @@ import Foundation
 import AnyCodable
 #endif
 
-/** Статус. */
 public enum CardState: String, Codable, CaseIterable {
     case emitted = "Emitted"
     case packed = "Packed"

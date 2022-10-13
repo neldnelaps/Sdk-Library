@@ -13,9 +13,9 @@ import AnyCodable
 /** Информация о возможности выполнять действия с картой. */
 public struct CardActionAccessInfo: Codable, JSONEncodable, Hashable {
 
-    /** Можно ли заблокировать. */
+    /** Возможность заблокировать карту. */
     public var canBlock: Bool?
-    /** Можно ли заменить. */
+    /** Возможность заменить карту. */
     public var canReplace: Bool?
 
     public init(canBlock: Bool? = nil, canReplace: Bool? = nil) {

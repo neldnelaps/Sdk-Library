@@ -10,6 +10,7 @@ import Foundation
 import AnyCodable
 #endif
 
+<<<<<<< Updated upstream
 /** Модель представления для вариантов написания. */
 public struct NameCaseModel: Codable, JSONEncodable, Hashable {
 
@@ -18,6 +19,16 @@ public struct NameCaseModel: Codable, JSONEncodable, Hashable {
     /** В единственном числе и родительном падеже. */
     public var genitive: String?
     /** Во множественном числе и именительном падеже. */
+=======
+/** Модель склонения названия по падежам. */
+public struct NameCaseModel: Codable, JSONEncodable, Hashable {
+
+    /** Именительный падеж. */
+    public var nominative: String?
+    /** Родительный падеж, ед.число. */
+    public var genitive: String?
+    /** Родительный падеж, мн.число. */
+>>>>>>> Stashed changes
     public var plural: String?
     /** Сокращенный вариант. */
     public var abbreviation: String?

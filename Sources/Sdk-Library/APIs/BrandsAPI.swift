@@ -13,16 +13,15 @@ import AnyCodable
 open class BrandsAPI {
 
     /**
-     Получение описания всех брендов.
+     Возвращает информацию о бренде по его внешнему идентификатору.
      
-     - parameter filterFrom: (query) Начало выборки. (optional)
-     - parameter filterCount: (query) Количество. (optional)
+     - parameter uid: (path) Внешний идентификатор бренда. 
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func brandsGetBrands(filterFrom: Int? = nil, filterCount: Int? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfPagedViewModelOfBrandModel?, _ error: Error?) -> Void)) -> RequestTask {
-        return brandsGetBrandsWithRequestBuilder(filterFrom: filterFrom, filterCount: filterCount).execute(apiResponseQueue) { result in
+    open class func brandsGetBrandInfo(uid: String, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfCommonBrandModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return brandsGetBrandInfoWithRequestBuilder(uid: uid).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -33,21 +32,123 @@ open class BrandsAPI {
     }
 
     /**
-     Получение описания всех брендов.
-     - GET /v1.2/Brands
-     - parameter filterFrom: (query) Начало выборки. (optional)
-     - parameter filterCount: (query) Количество. (optional)
+     Возвращает информацию о бренде по его внешнему идентификатору.
+     - GET /v1.2/brands/{uid}
+     - parameter uid: (path) Внешний идентификатор бренда. 
+     - returns: RequestBuilder<ResultModelOfCommonBrandModel> 
+     */
+    open class func brandsGetBrandInfoWithRequestBuilder(uid: String) -> RequestBuilder<ResultModelOfCommonBrandModel> {
+        var localVariablePath = "/v1.2/brands/{uid}"
+        let uidPreEscape = "\(APIHelper.mapValueToPathItem(uid))"
+        let uidPostEscape = uidPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{uid}", with: uidPostEscape, options: .literal, range: nil)
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfCommonBrandModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Возвращает информацию о бренде по его внутреннему идентификатору.
+     
+     - parameter id: (path) Внутренний идентификатор бренда. 
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func brandsGetBrandInfoById(id: Int, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfBrandViewModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return brandsGetBrandInfoByIdWithRequestBuilder(id: id).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Возвращает информацию о бренде по его внутреннему идентификатору.
+     - GET /v1.2/brands/{id}
+     - parameter id: (path) Внутренний идентификатор бренда. 
+     - returns: RequestBuilder<ResultModelOfBrandViewModel> 
+     */
+    open class func brandsGetBrandInfoByIdWithRequestBuilder(id: Int) -> RequestBuilder<ResultModelOfBrandViewModel> {
+        var localVariablePath = "/v1.2/brands/{id}"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ResultModelOfBrandViewModel>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Возвращает список всех брендов.
+     
+     - parameter filterState: (query) Состояние бренда (Hidden — скрытый, Normal — обычный). (optional)
+     - parameter filterFrom: (query) Порядковый номер начального элемента выборки. (optional)
+     - parameter filterCount: (query) Количество возвращаемых элементов выборки. (optional)
+     - parameter filterSubstring: (query) Подстрока для поиска по названию бренда. (optional)
+     - parameter filterSortingIds: (query) Внутренние идентификаторы брендов, которые будут отображены первыми в списке. (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func brandsGetBrands(filterState: BrandInfoState? = nil, filterFrom: Int? = nil, filterCount: Int? = nil, filterSubstring: String? = nil, filterSortingIds: [Int]? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ResultModelOfPagedViewModelOfBrandModel?, _ error: Error?) -> Void)) -> RequestTask {
+        return brandsGetBrandsWithRequestBuilder(filterState: filterState, filterFrom: filterFrom, filterCount: filterCount, filterSubstring: filterSubstring, filterSortingIds: filterSortingIds).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Возвращает список всех брендов.
+     - GET /v1.2/brands
+     - parameter filterState: (query) Состояние бренда (Hidden — скрытый, Normal — обычный). (optional)
+     - parameter filterFrom: (query) Порядковый номер начального элемента выборки. (optional)
+     - parameter filterCount: (query) Количество возвращаемых элементов выборки. (optional)
+     - parameter filterSubstring: (query) Подстрока для поиска по названию бренда. (optional)
+     - parameter filterSortingIds: (query) Внутренние идентификаторы брендов, которые будут отображены первыми в списке. (optional)
      - returns: RequestBuilder<ResultModelOfPagedViewModelOfBrandModel> 
      */
-    open class func brandsGetBrandsWithRequestBuilder(filterFrom: Int? = nil, filterCount: Int? = nil) -> RequestBuilder<ResultModelOfPagedViewModelOfBrandModel> {
-        let localVariablePath = "/v1.2/Brands"
+    open class func brandsGetBrandsWithRequestBuilder(filterState: BrandInfoState? = nil, filterFrom: Int? = nil, filterCount: Int? = nil, filterSubstring: String? = nil, filterSortingIds: [Int]? = nil) -> RequestBuilder<ResultModelOfPagedViewModelOfBrandModel> {
+        let localVariablePath = "/v1.2/brands"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "filter.state": filterState?.encodeToJSON(),
             "filter.from": filterFrom?.encodeToJSON(),
             "filter.count": filterCount?.encodeToJSON(),
+            "filter.substring": filterSubstring?.encodeToJSON(),
+            "filter.sortingIds": filterSortingIds?.encodeToJSON(),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [

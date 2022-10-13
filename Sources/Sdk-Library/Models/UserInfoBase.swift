@@ -16,7 +16,7 @@ public struct UserInfoBase: Codable, JSONEncodable, Hashable {
     /** Идентификатор пользователя. */
     public var id: Int?
     /** Уникальный идентификатор пользователя. */
-    public var personUid: String?
+    public var personUid: UUID?
     /** Имя. */
     public var firstName: String?
     /** Фамилия. */
@@ -28,7 +28,7 @@ public struct UserInfoBase: Codable, JSONEncodable, Hashable {
     /** Email. */
     public var email: String?
 
-    public init(id: Int? = nil, personUid: String? = nil, firstName: String? = nil, lastName: String? = nil, patronymicName: String? = nil, phoneNumber: String? = nil, email: String? = nil) {
+    public init(id: Int? = nil, personUid: UUID? = nil, firstName: String? = nil, lastName: String? = nil, patronymicName: String? = nil, phoneNumber: String? = nil, email: String? = nil) {
         self.id = id
         self.personUid = personUid
         self.firstName = firstName

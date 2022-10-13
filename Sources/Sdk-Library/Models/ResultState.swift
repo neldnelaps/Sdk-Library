@@ -10,7 +10,7 @@ import Foundation
 import AnyCodable
 #endif
 
-/** Статус. */
+/** Статус выполнения запроса  Success - запрос выполнен успешно, Fail - не удалось выполнить запрос, Error - ошибка бизнес-логики при выполнении запроса (например, не передан обязательный параметр запроса), ValidationError - ошибка валидации при выполнении запроса (например, введенные данные не соответствуют требуемому типу данных). */
 public enum ResultState: String, Codable, CaseIterable {
     case success = "Success"
     case fail = "Fail"
