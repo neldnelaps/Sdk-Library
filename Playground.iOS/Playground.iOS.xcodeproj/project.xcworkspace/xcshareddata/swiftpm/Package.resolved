@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Flight-School/AnyCodable",
       "state" : {
-        "branch" : "master",
-        "revision" : "56901f2af3625b38924d488b612e95fe8846ee9b"
+        "revision" : "862808b2070cd908cb04f9aafe7de83d35f81b05",
+        "version" : "0.6.7"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/neldnelaps/Sdk-Library.git",
       "state" : {
-        "branch" : "master-22.1",
-        "revision" : "1a8886070b4e5ddfa73c91bcb0cd640fbf49e90d"
+        "revision" : "4e0c09998661f69d27fc8809917d367d239a2eb2",
+        "version" : "2022.1.1038"
       }
     }
   ],

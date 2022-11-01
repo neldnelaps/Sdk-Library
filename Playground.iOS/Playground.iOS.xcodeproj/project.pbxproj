@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75268D722910F61600F30C13 /* Sdk-Library in Frameworks */ = {isa = PBXBuildFile; productRef = 75268D712910F61600F30C13 /* Sdk-Library */; };
 		752719C728F809D800961EBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752719C628F809D800961EBE /* AppDelegate.swift */; };
 		752719C928F809D800961EBE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752719C828F809D800961EBE /* SceneDelegate.swift */; };
 		752719CB28F809D800961EBE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752719CA28F809D800961EBE /* ViewController.swift */; };
@@ -16,7 +17,6 @@
 		752719DE28F809D900961EBE /* Playground_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752719DD28F809D900961EBE /* Playground_iOSTests.swift */; };
 		752719E828F809D900961EBE /* Playground_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752719E728F809D900961EBE /* Playground_iOSUITests.swift */; };
 		752719EA28F809D900961EBE /* Playground_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752719E928F809D900961EBE /* Playground_iOSUITestsLaunchTests.swift */; };
-		752719F828F809F600961EBE /* Sdk-Library in Frameworks */ = {isa = PBXBuildFile; productRef = 752719F728F809F600961EBE /* Sdk-Library */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				752719F828F809F600961EBE /* Sdk-Library in Frameworks */,
+				75268D722910F61600F30C13 /* Sdk-Library in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +146,7 @@
 			);
 			name = Playground.iOS;
 			packageProductDependencies = (
-				752719F728F809F600961EBE /* Sdk-Library */,
+				75268D712910F61600F30C13 /* Sdk-Library */,
 			);
 			productName = Playground.iOS;
 			productReference = 752719C328F809D800961EBE /* Playground.iOS.app */;
@@ -221,7 +221,7 @@
 			);
 			mainGroup = 752719BA28F809D800961EBE;
 			packageReferences = (
-				752719F628F809F600961EBE /* XCRemoteSwiftPackageReference "Sdk-Library" */,
+				75268D702910F61600F30C13 /* XCRemoteSwiftPackageReference "Sdk-Library" */,
 			);
 			productRefGroup = 752719C428F809D800961EBE /* Products */;
 			projectDirPath = "";
@@ -606,20 +606,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		752719F628F809F600961EBE /* XCRemoteSwiftPackageReference "Sdk-Library" */ = {
+		75268D702910F61600F30C13 /* XCRemoteSwiftPackageReference "Sdk-Library" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/neldnelaps/Sdk-Library.git";
 			requirement = {
-				branch = "master-22.1";
-				kind = branch;
+				kind = exactVersion;
+				version = 2022.1.1038;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		752719F728F809F600961EBE /* Sdk-Library */ = {
+		75268D712910F61600F30C13 /* Sdk-Library */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 752719F628F809F600961EBE /* XCRemoteSwiftPackageReference "Sdk-Library" */;
+			package = 75268D702910F61600F30C13 /* XCRemoteSwiftPackageReference "Sdk-Library" */;
 			productName = "Sdk-Library";
 		};
 /* End XCSwiftPackageProductDependency section */
