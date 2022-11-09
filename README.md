@@ -1,3 +1,9 @@
-# Sdk-Library
+<center><# Sdk-Library/center>
 
-A description of this package.
+Library Loymax generated with OpenApi Generator.
+
+### Playground.iOS - example:
+AppDelegate.swift -> application -> OpenAPIClientAPI.basePath = ""
+
+#### Stand:
+**_OpenAPIClientAPI.basePath = "https://example.loymax.tech/publicapi"_**
