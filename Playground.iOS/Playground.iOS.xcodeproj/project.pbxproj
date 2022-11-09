@@ -17,6 +17,8 @@
 		752719DE28F809D900961EBE /* Playground_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752719DD28F809D900961EBE /* Playground_iOSTests.swift */; };
 		752719E828F809D900961EBE /* Playground_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752719E728F809D900961EBE /* Playground_iOSUITests.swift */; };
 		752719EA28F809D900961EBE /* Playground_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752719E928F809D900961EBE /* Playground_iOSUITestsLaunchTests.swift */; };
+		75CEEFCE291264E000B7948A /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CEEFCD291264E000B7948A /* Client.swift */; };
+		75DC0D66291B6ECE005ED637 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DC0D65291B6ECE005ED637 /* AuthAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		752719E328F809D900961EBE /* Playground.iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Playground.iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		752719E728F809D900961EBE /* Playground_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playground_iOSUITests.swift; sourceTree = "<group>"; };
 		752719E928F809D900961EBE /* Playground_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playground_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		75CEEFCD291264E000B7948A /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		75DC0D65291B6ECE005ED637 /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,7 @@
 		752719BA28F809D800961EBE = {
 			isa = PBXGroup;
 			children = (
+				75DC0D5B291B5468005ED637 /* Core */,
 				752719C528F809D800961EBE /* Playground.iOS */,
 				752719DC28F809D900961EBE /* Playground.iOSTests */,
 				752719E628F809D900961EBE /* Playground.iOSUITests */,
@@ -127,6 +132,31 @@
 				752719E928F809D900961EBE /* Playground_iOSUITestsLaunchTests.swift */,
 			);
 			path = Playground.iOSUITests;
+			sourceTree = "<group>";
+		};
+		75CEEFCC291264C900B7948A /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				75CEEFCD291264E000B7948A /* Client.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		75DC0D5B291B5468005ED637 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				75CEEFCC291264C900B7948A /* Client */,
+				75DC0D64291B6EBA005ED637 /* APIs */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		75DC0D64291B6EBA005ED637 /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				75DC0D65291B6ECE005ED637 /* AuthAPI.swift */,
+			);
+			path = APIs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +298,8 @@
 			files = (
 				752719CB28F809D800961EBE /* ViewController.swift in Sources */,
 				752719C728F809D800961EBE /* AppDelegate.swift in Sources */,
+				75CEEFCE291264E000B7948A /* Client.swift in Sources */,
+				75DC0D66291B6ECE005ED637 /* AuthAPI.swift in Sources */,
 				752719C928F809D800961EBE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
