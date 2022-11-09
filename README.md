@@ -1,4 +1,4 @@
-<center><# Sdk-Library/center>
+<center># Sdk-Library</center>
 
 Library Loymax generated with OpenApi Generator.
 
